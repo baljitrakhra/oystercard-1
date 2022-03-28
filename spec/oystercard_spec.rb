@@ -8,5 +8,8 @@ describe Oystercard do
   it 'should add an amount to balance.' do
     expect { subject.top_up(30) }.to change { subject.balance }.by(30.0)
   end
-end
 
+  it 'should limit the card to default limit' do
+    expect { subject.top_up(100) }.to raise_error "Cannot exceed #{Oystercard::DEFAULT_LIMIT} limit"
+  end
+end

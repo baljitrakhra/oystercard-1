@@ -1,4 +1,5 @@
 class Oystercard
+  DEFAULT_LIMIT = 90.0
   attr_reader :balance
 
   def initialize
@@ -6,6 +7,7 @@ class Oystercard
   end
 
   def top_up(amount)
+    raise "Cannot exceed #{DEFAULT_LIMIT} limit" if @balance + amount.to_f > DEFAULT_LIMIT
     @balance += amount.to_f
   end
 end
