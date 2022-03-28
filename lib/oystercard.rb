@@ -10,4 +10,8 @@ class Oystercard
     raise "Cannot exceed #{DEFAULT_LIMIT} limit" if @balance + amount.to_f > DEFAULT_LIMIT
     @balance += amount.to_f
   end
+
+  def deduct(amount)
+    @balance -= amount.to_f
+  end
 end
