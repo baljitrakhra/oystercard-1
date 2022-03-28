@@ -22,11 +22,16 @@ describe Oystercard do
   end
 
   it 'should change card state to in use' do
+    subject.top_up(50)
     expect { subject.touch_in }.to change { subject.state }.to("in use")
   end
 
   it 'should change card state to out of use' do
     subject.state = "in use"
     expect { subject.touch_out }.to change { subject.state }.to("out of use")
+  end
+
+  it 'should raise an error if balance is below minimum fare' do
+    expect { subject.touch_in }.to raise_error "Below minimum fare"
   end
 end

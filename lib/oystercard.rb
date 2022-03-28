@@ -1,5 +1,6 @@
 class Oystercard
   DEFAULT_LIMIT = 90.0
+  MINIMUM_FARE = 1.0
   attr_reader :balance
   attr_accessor :state
 
@@ -22,6 +23,7 @@ class Oystercard
   end
 
   def touch_in
+    raise "Below minimum fare" if @balance < MINIMUM_FARE
     @state = "in use"
   end
 
