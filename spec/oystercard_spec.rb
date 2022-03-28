@@ -16,4 +16,17 @@ describe Oystercard do
   it 'should deduct an amount from balance' do
     expect { subject.deduct(30) }.to change { subject.balance }.by(-30.0)
   end
+
+  it 'should check in use or out of use' do
+    expect(subject.in_journey?).to eq false
+  end
+
+  it 'should change card state to in use' do
+    expect { subject.touch_in }.to change { subject.state }.to("in use")
+  end
+
+  it 'should change card state to out of use' do
+    subject.state = "in use"
+    expect { subject.touch_out }.to change { subject.state }.to("out of use")
+  end
 end
