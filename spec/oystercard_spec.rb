@@ -60,7 +60,8 @@ describe Oystercard do
     end
 
     it 'will tell you which station you have exited from' do
-      expect { card.touch_out(station_exit) }.to change { card.exit_station}.to station_exit
+      journey = Journey.new
+      expect(card.touch_out(station_exit)).to eq journey.end_journey(station_exit)
     end
   end
 
