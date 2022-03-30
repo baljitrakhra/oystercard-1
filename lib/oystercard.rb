@@ -21,6 +21,8 @@ class Oystercard
 
   def touch_in(station)
     raise "Below minimum fare" if @balance < MINIMUM_FARE
+    journey = Journey.new
+    # journey.start_journey(station)
     @entry_station = station
   end
 

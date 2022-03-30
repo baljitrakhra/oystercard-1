@@ -38,7 +38,6 @@ describe Oystercard do
     it 'should raise an error if balance is below minimum fare' do
       expect { card.touch_in(station) }.to raise_error "Below minimum fare"
     end
-
   end
 
   describe '#touch_out' do
