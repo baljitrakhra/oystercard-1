@@ -16,4 +16,14 @@ describe Journey do
       expect(journey.start_journey(station)).to eq journey.entry_station 
     end
   end
+  describe '#end_journey' do
+    
+    let (:station) { double :station }
+
+    it {is_expected.to respond_to(:end_journey).with(1).argument}
+    it ' when you touchout of a station' do
+      card.touch_out(station)
+      expect(journey.end_journey(station)).to eq journey.exit_station
+    end
+  end
 end

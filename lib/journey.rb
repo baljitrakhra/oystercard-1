@@ -9,4 +9,8 @@ class Journey
   def start_journey(station)
     @entry_station = station
   end
+
+  def end_journey(station)
+
+  end
 end
