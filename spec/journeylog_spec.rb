@@ -21,7 +21,7 @@ describe JourneyLog do
     let(:entry_station) {double :station}
     let(:journeylog) { JourneyLog.new(Journey.new(nil))}
     it 'starts a journey' do
-      expect(journeylog.start(entry_station)).to eq journeylog.start_journey
+      expect(journeylog.start(entry_station)).to eq journeylog.current_journey_var[:entry_station]
     end
   end
   context "#current journey" do
@@ -29,7 +29,21 @@ describe JourneyLog do
     let(:exit_station) { double :station}
     let(:journeylog) { JourneyLog.new(Journey.new(entry_station)) }
     it "returns an incomplete journey" do
-    expect(journeylog.current_journey).to eq(entry_station: entry_station, exit_station: nil)
+      journeylog.start(entry_station)
+      expect(journeylog.current_journey).to eq(entry_station: entry_station, exit_station: nil)
+    end
+    # xit 'returns a complete journey' do
+    #   journeylog.start(entry_station)
+    # end
   end
+
+  context '#finishing_journey'do
+    let(:entry_station) {double :station}
+    let(:exit_station) { double :station}
+    let(:journeylog) { JourneyLog.new(Journey.new(nil)) }
+    it 'add an exit station to current journey' do
+      p journeylog.current_journey[:exit_station]
+      expect(journeylog.finish(exit_station)).to eq(journeylog.current_journey_var[:exit_station])
+    end
   end
 end
