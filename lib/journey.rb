@@ -1,6 +1,7 @@
 class Journey
   attr_reader :entry_station, :exit_station, :PENALITY_FARE, :list_of_journeys
   PENALITY_FARE = 6
+  
   def initialize(entry_station = nil)
     @entry_station = entry_station
     @exit_station = nil
@@ -27,7 +28,7 @@ class Journey
   end
 
   private
-  
+
   def add_journey
     journey = {entry_station: @entry_station, exit_station: @exit_station}
     @list_of_journeys.push(journey)
