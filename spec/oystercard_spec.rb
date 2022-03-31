@@ -19,11 +19,7 @@ describe Oystercard do
     end
   end
 
-  describe '#in_journey?' do
-    it 'should check in use or out of use' do
-      expect(card.in_journey?).to eq false
-    end
-  end
+ 
 
   describe '#touch_in' do
     let (:station) {double :station}
@@ -32,12 +28,13 @@ describe Oystercard do
 
     it 'should change card state to in use' do
       card.top_up(50)
-      expect { card.touch_in(station) }.to change{card.in_use}.to true 
+      expect { card.touch_in(station) }.to change{card.entry_station}.to station 
     end
 
     it 'should raise an error if balance is below minimum fare' do
       expect { card.touch_in(station) }.to raise_error "Below minimum fare"
     end
+
   end
 
   describe '#touch_out' do
@@ -51,35 +48,32 @@ describe Oystercard do
 
     it {is_expected.to respond_to(:touch_out).with(1).argument}
 
-    it 'should change card state to out of use' do
-      expect { card.touch_out(station_exit) }.to change { card.in_journey? }.to(false)
-    end
+   
 
     it 'should deduct the minimum fare' do
       expect { card.touch_out(station_exit) }.to change { card.balance }.by(-Oystercard::MINIMUM_FARE)
     end
 
     it 'will tell you which station you have exited from' do
-      journey = Journey.new
-      expect(card.touch_out(station_exit)).to eq journey.end_journey(station_exit)
+      expect { card.touch_out(station_exit) }.to change { card.exit_station}.to station_exit
     end
   end
 
-#   describe '#list_of_journeys' do
-#   let (:station_entry) {double :station}
-#   let (:station_exit) {double :station}
-#   let (:journey) {{entry_station: station_entry, exit_station: station_exit}}
+  describe '#list_of_journeys' do
+  let (:station_entry) {double :station}
+  let (:station_exit) {double :station}
+  let (:journey) {{entry_station: station_entry, exit_station: station_exit}}
 
-#     it 'gives an empty array by default' do
-#       expect(card.list_of_journeys).to eq []
-#     end
+    it 'gives an empty array by default' do
+      expect(card.list_of_journeys).to eq []
+    end
 
-#     it 'stores a journey' do
-#       card.top_up(30)
-#       card.touch_in(station_entry)
-#       card.touch_out(station_exit)
-#       expect(card.list_of_journeys).to include journey
-#       expect(card.list_of_journeys.length).to eq 1
-#     end
-#   end
- end
+    it 'stores a journey' do
+      card.top_up(30)
+      card.touch_in(station_entry)
+      card.touch_out(station_exit)
+      expect(card.list_of_journeys).to include journey
+      expect(card.list_of_journeys.length).to eq 1
+    end
+  end
+end
