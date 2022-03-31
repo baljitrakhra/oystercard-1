@@ -4,7 +4,7 @@ describe JourneyLog do
   describe '#initalises' do
     let(:journeylog) { JourneyLog.new(Journey.new(nil))}
 
-    it ' create a new journelog' do
+    it ' create a new journeylog' do
       # journey_l = JourneyLog.new
       expect(journeylog).to be_an_instance_of(JourneyLog) 
     end
@@ -24,5 +24,12 @@ describe JourneyLog do
       expect(journeylog.start(entry_station)).to eq journeylog.start_journey
     end
   end
-
+  context "#current journey" do
+    let(:entry_station) {double :station}
+    let(:exit_station) { double :station}
+    let(:journeylog) { JourneyLog.new(Journey.new(entry_station)) }
+    it "returns an incomplete journey" do
+    expect(journeylog.current_journey).to eq(entry_station: entry_station, exit_station: nil)
+  end
+  end
 end
