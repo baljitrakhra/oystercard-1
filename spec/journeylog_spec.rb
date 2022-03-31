@@ -42,8 +42,17 @@ describe JourneyLog do
     let(:exit_station) { double :station}
     let(:journeylog) { JourneyLog.new(Journey.new(nil)) }
     it 'add an exit station to current journey' do
-      p journeylog.current_journey[:exit_station]
       expect(journeylog.finish(exit_station)).to eq(journeylog.current_journey_var[:exit_station])
+    end
+  end
+  context '#journey list' do
+    let(:entry_station) {double :station}
+    let(:exit_station) { double :station}
+    let(:journeylog) { JourneyLog.new(Journey.new(nil)) }
+    it "Provides a duplicate list of previous journeys" do
+    journeylog.start(entry_station)
+    journeylog.finish(exit_station)
+    expect(journeylog.journeys).to eq journeylog.current_journey_var
     end
   end
 end

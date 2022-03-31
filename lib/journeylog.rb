@@ -17,6 +17,11 @@ class JourneyLog
   
   def finish(station)
     @current_journey_var[:exit_station] = station
+    @list_of_journeys.push(@current_journey_var)
+  end
+
+  def journeys
+    @list_of_journeys.dup
   end
 
   def current_journey

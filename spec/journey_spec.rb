@@ -39,20 +39,20 @@ describe Journey do
     end
 
   end
-  describe '#list_of_journeys' do
-    let (:station_entry) {double 'entry station'}
-    let (:station_exit) {double 'exit station'}
-    let (:journey) {{entry_station: station_entry, exit_station: station_exit}}
+  # describe '#list_of_journeys' do
+  #   let (:station_entry) {double 'entry station'}
+  #   let (:station_exit) {double 'exit station'}
+  #   let (:journey) {{entry_station: station_entry, exit_station: station_exit}}
   
-      it 'gives an empty array by default' do
-        expect(subject.list_of_journeys).to eq []
-      end
+      # it 'gives an empty array by default' do
+      #   expect(subject.list_of_journeys).to eq []
+      # end
   
-      it 'stores a journey' do
-        jj = Journey.new(station_entry)
-        jj.end_journey(station_exit)
-        expect(jj.list_of_journeys).to include journey
-        expect(jj.list_of_journeys.length).to eq 1
-      end
-    end 
+      # it 'stores a journey' do
+      #   jj = Journey.new(station_entry)
+      #   jj.end_journey(station_exit)
+      #   expect(jj.list_of_journeys).to include journey
+      #   expect(jj.list_of_journeys.length).to eq 1
+      # end
+    # end 
 end
