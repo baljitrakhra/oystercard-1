@@ -6,7 +6,7 @@ describe Journey do
   let(:card) {Oystercard.new}
 
   describe '#journey creation' do
-
+  
     it ' has a entry station at start' do
     subject = Journey.new(double_entry_station)
     expect(subject.entry_station).to eq double_entry_station 
@@ -19,17 +19,12 @@ describe Journey do
     end
   end
   describe '#completeness checks' do
-    
-   
     it 'when there is an entery station and an exit station' do
       subject = Journey.new(double_entry_station)
       subject.end_journey(double_exit_station)
       expect(subject.entry_station).to eq nil
     end
     it {is_expected.to respond_to(:complete?)}
-    
-   
-    
   end
   
   describe '#fare' do
@@ -44,5 +39,20 @@ describe Journey do
     end
 
   end
-
+  describe '#list_of_journeys' do
+    let (:station_entry) {double 'entry station'}
+    let (:station_exit) {double 'exit station'}
+    let (:journey) {{entry_station: station_entry, exit_station: station_exit}}
+  
+      it 'gives an empty array by default' do
+        expect(subject.list_of_journeys).to eq []
+      end
+  
+      it 'stores a journey' do
+        jj = Journey.new(station_entry)
+        jj.end_journey(station_exit)
+        expect(jj.list_of_journeys).to include journey
+        expect(jj.list_of_journeys.length).to eq 1
+      end
+    end 
 end

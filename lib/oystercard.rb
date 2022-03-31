@@ -5,9 +5,9 @@ class Oystercard
 
   def initialize()
     @balance = 0.0
-    @entry_station = nil
-    @exit_station = nil
-    @list_of_journeys = []
+    # @entry_station = nil
+    # @exit_station = nil
+    # @list_of_journeys = []
     @journey_touch = Journey.new
   end
 
@@ -20,15 +20,15 @@ class Oystercard
   def touch_in(station)
     raise "Below minimum fare" if @balance < MINIMUM_FARE
     journey_touch = Journey.new(station)
-    @entry_station = station # I think this need to go as well 
+    # @entry_station = station # I think this need to go as well 
   end
 
   def touch_out(station)
     self.deduct(MINIMUM_FARE) #this need to go into fare
     journey_touch.end_journey(station)
-    @exit_station = station
-    add_journey
-    @entry_station = nil
+    # @exit_station = station
+    # add_journey
+    # @entry_station = nil
   end
 
   private
@@ -37,8 +37,8 @@ class Oystercard
     @balance -= amount.to_f
   end
 
-  def add_journey
-    journey = {entry_station: @entry_station, exit_station: @exit_station}
-    list_of_journeys.push(journey)
-  end
+  # def add_journey
+  #   journey = {entry_station: @entry_station, exit_station: @exit_station}
+  #   list_of_journeys.push(journey)
+  # end
 end
