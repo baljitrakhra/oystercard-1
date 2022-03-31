@@ -1,7 +1,7 @@
 class Oystercard
   DEFAULT_LIMIT = 90.0
   MINIMUM_FARE = 1.0
-  attr_reader :balance, :entry_station, :exit_station, :list_of_journeys, :journey_touch
+  attr_reader :balance, :journey_touch
 
   def initialize()
     @balance = 0.0

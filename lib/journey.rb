@@ -19,12 +19,7 @@ class Journey
   end
 
   def fare
-    complete?
-    if complete?
-      Oystercard::MINIMUM_FARE
-    else 
-      PENALITY_FARE
-    end
+    complete? ? Oystercard::MINIMUM_FARE : PENALITY_FARE
   end
 
   private
