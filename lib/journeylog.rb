@@ -11,13 +11,17 @@ class JourneyLog
   end
 
   def start(station)
-    @start_journey = Journey.new(station)
+    @current_journey_var[:exit_station] = nil
     @current_journey_var[:entry_station] = station
+    #@start_journey = Journey.new(station)
+    
   end
   
   def finish(station)
     @current_journey_var[:exit_station] = station
     @list_of_journeys.push(@current_journey_var)
+    @current_journey_var = {entry_station: nil, exit_station: nil}
+    @journey.end_journey(station)
   end
 
   def journeys
